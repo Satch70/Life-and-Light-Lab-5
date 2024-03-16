@@ -19,9 +19,10 @@ def filter_range(data, min_wavelength=480, max_wavelength=800):
     """
     return data[(data[:, 0] >= min_wavelength) & (data[:, 0] <= max_wavelength)]
 
-def plot_spectra(filenames, folder='data'):
+def plot_spectra(filenames, folder='data', save_path=None):
     """
     Plot the reflectance spectra for given filenames within a folder.
+    Optionally save the plot to the specified path.
     """
     plt.figure(figsize=(10, 6))
 
@@ -36,8 +37,12 @@ def plot_spectra(filenames, folder='data'):
     plt.ylabel('Reflectance (%)')
     plt.legend()
     plt.grid(True)
-    plt.show()
+    
+    if save_path:
+        plt.savefig(save_path)  # Save the figure to the specified path
+    plt.show()  # Display the figure
 
 if __name__ == "__main__":
-    filenames = ['healthy.txt', 'sad1.txt', 'sad2.txt']
-    plot_spectra(filenames)
+    filenames = ['healthy.txt', 'sad1.txt']
+    save_path = 'data/spectral_plot.png'  # Example path and filename where to save the plot
+    plot_spectra(filenames, save_path=save_path)
